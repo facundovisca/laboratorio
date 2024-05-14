@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Index</title>
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body {
+      background-color: black;
+      color: white;
+      margin: 0;
+    }
+    .image-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh; /* Ocupar toda la altura de la ventana */
+    }
+    .image-container img {
+      width: 100%; /* Ocupar todo el ancho del contenedor */
+      height: 100%; /* Ocupar toda la altura del contenedor */
+      object-fit: cover; /* Ajustar la imagen para que cubra todo el contenedor */
+      opacity: 0.04;
+      transition: opacity 0.8s ease;
+    }
+    .image-container img.clicked {
+      opacity: 1 !important; /* Mantener la imagen visible cuando se hace clic */
+    }
+    .row {
+      margin: 0 !important; /* Eliminar márgenes */
+      padding: 0 !important; /* Eliminar relleno */
+    }
+    .col-md-2 {
+      padding: 0 !important; /* Eliminar relleno */
+    }
+  </style>
+</head>
+<body>
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-2 col-sm-4">
+      <div class="image-container">
+        <img src="img/1.png" alt="Imagen 1" onclick="toggleImage(this, 'sound/1.mp3', 'audio1')">
+      </div>
+    </div>
+    <div class="col-md-2 col-sm-4">
+      <div class="image-container">
+        <img src="img/2.png" alt="Imagen 2" onclick="toggleImage(this, 'sound/2.mp3', 'audio2')">
+      </div>
+    </div>
+    <div class="col-md-2 col-sm-4">
+      <div class="image-container">
+        <img src="img/3.png" alt="Imagen 3" onclick="toggleImage(this, 'sound/3.mp3', 'audio3')">
+      </div>
+    </div>
+    <div class="col-md-2 col-sm-4">
+      <div class="image-container">
+        <img src="img/4.png" alt="Imagen 4" onclick="toggleImage(this, 'sound/4.mp3', 'audio4')">
+      </div>
+    </div>
+    <div class="col-md-2 col-sm-4">
+      <div class="image-container">
+        <img src="img/5.png" alt="Imagen 5" onclick="toggleImage(this, 'sound/5.mp3', 'audio5')">
+      </div>
+    </div>
+    <div class="col-md-2 col-sm-4">
+      <div class="image-container">
+        <img src="img/6.png" alt="Imagen 6" onclick="toggleImage(this, 'sound/6.mp3', 'audio6')">
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  var audioStatus = {}; // Objeto para almacenar el estado de reproducción de cada audio
+
+  function toggleImage(image, audioSrc, audioId) {
+    if (!audioStatus[audioId] || audioStatus[audioId].paused) {
+      var audio = new Audio(audioSrc);
+      audio.loop = true;
+      audio.play();
+      audioStatus[audioId] = audio;
+      image.classList.add('clicked');
+    } else {
+      var audio = audioStatus[audioId];
+      audio.pause();
+      audio.currentTime = 0;
+      delete audioStatus[audioId];
+      image.classList.remove('clicked');
+    }
+  }
+</script>
+
+</body>
+</html>
